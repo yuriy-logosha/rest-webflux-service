@@ -1,0 +1,14 @@
+<xsd:schema xmlns="http://www.w3.org/2000/10/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="xsd.my_soap_forum.world_corp.us">
+    <xsd:complexType name="message">
+        <xsd:all>
+            <xsd:element name="value" type="xsd:string"/>
+        </xsd:all>
+    </xsd:complexType>
+    <xsd:complexType name="resultcode">
+        <xsd:all>
+            <xsd:element name="value" type="xsd:int"/>
+        </xsd:all>
+    </xsd:complexType>
+</xsd:schema>
