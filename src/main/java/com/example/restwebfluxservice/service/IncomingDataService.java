@@ -23,9 +23,9 @@ public class IncomingDataService {
 
     public Mono<Integer> create(IncomingData data) {
         return Mono.defer(() -> {
-            Integer resultCode = client.getResultCode(data.getMessage());
+            client.getResultCode(data.getMessage());
             incomingDataRepository.save(data);
-            return Mono.just(resultCode);
+            return Mono.just(data.getId());
         });
     }
 }

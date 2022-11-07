@@ -9,6 +9,8 @@ import us.world_corp.my_soap_forum.*;
 
 public class SoapServiceAdapter extends WebServiceGatewaySupport {
 
+    private static final String SOAP_URI = "http://localhost:8080/ws/message";
+
     private static final Logger log = LoggerFactory.getLogger(SoapServiceAdapter.class);
 
     public Integer getResultCode(String message) {
@@ -17,8 +19,7 @@ public class SoapServiceAdapter extends WebServiceGatewaySupport {
         msg.setValue(message);
 
         Resultcode resp = (Resultcode) getWebServiceTemplate()
-                .marshalSendAndReceive("http://localhost:8080/ws/message", msg,
-                        new SoapActionCallback(""));
+                .marshalSendAndReceive(SOAP_URI, msg, new SoapActionCallback(""));
 
         return resp.getValue();
     }
