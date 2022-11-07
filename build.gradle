@@ -23,20 +23,23 @@ sourceSets {
 
 task genJaxbXsd {
     ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+    ext.classesDir = "${buildDir}/classes/jaxb"
     ext.schema = "src/main/resources/message.xsd"
 
-    outputs.dir sourcesDir
+    outputs.dir classesDir
 
     doLast() {
         project.ant {
             taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
                     classpath: configurations.jaxb.asPath
             mkdir(dir: sourcesDir)
+            mkdir(dir: classesDir)
 
-            xjc(destdir: sourcesDir, schema: schema) {
-                arg(value: "-wsdl")
+            xjc(destdir: sourcesDir, schema: schema,
+                    package: "us.world_corp.my_soap_forum") {
                 produces(dir: sourcesDir, includes: "**/*.java")
             }
+
         }
     }
 }
@@ -56,7 +59,7 @@ task genJaxbWSDL {
             mkdir(dir: classesDir)
 
             xjc(destdir: sourcesDir, schema: schema,
-                    package: "us.world_corp.my_soap_forum.wsdl") {
+                    package: "us.world_corp.my_soap_forum") {
                 arg(value: "-wsdl")
                 produces(dir: sourcesDir, includes: "**/*.java")
             }
@@ -78,7 +81,7 @@ task genJaxbWSDL {
     }
 }
 
-//compileJava.dependsOn genJaxb
+compileJava.dependsOn genJaxbXsd
 
 configurations {
     jaxb

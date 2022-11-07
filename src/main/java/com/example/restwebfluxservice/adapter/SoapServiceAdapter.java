@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
-import xsd.my_soap_forum.world_corp.us.Message;
-import xsd.my_soap_forum.world_corp.us.Resultcode;
+import us.world_corp.my_soap_forum.*;
+
 
 public class SoapServiceAdapter extends WebServiceGatewaySupport {
 

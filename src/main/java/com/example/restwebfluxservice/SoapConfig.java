@@ -16,6 +16,8 @@ import org.springframework.xml.xsd.XsdSchema;
 @Configuration
 public class SoapConfig extends WsConfigurerAdapter {
 
+    private static final String NAMESPACE = "us.world_corp.my_soap_forum";
+
     @Bean
     public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
@@ -29,7 +31,7 @@ public class SoapConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("MessagePort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("xsd.my_soap_forum.world_corp.us");
+        wsdl11Definition.setTargetNamespace(NAMESPACE);
         wsdl11Definition.setSchema(schema);
         return wsdl11Definition;
     }

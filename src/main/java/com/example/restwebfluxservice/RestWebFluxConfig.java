@@ -10,17 +10,20 @@ import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 @Configuration
 public class RestWebFluxConfig {
 
+    private static final String SOAP_NAMESPACE = "us.world_corp.my_soap_forum";
+    private static final String SOAP_SERVER_URI = "http://localhost:80/ws";
+
     @Bean
     public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath("xsd.my_soap_forum.world_corp.us");
+        marshaller.setContextPath(SOAP_NAMESPACE);
         return marshaller;
     }
 
     @Bean
     public SoapServiceAdapter resultCodeClient(Jaxb2Marshaller marshaller) {
         SoapServiceAdapter client = new SoapServiceAdapter();
-        client.setDefaultUri("http://localhost:80/ws");
+        client.setDefaultUri(SOAP_SERVER_URI);
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         ClientInterceptor[] interceptors = new ClientInterceptor[]{interceptor()};
