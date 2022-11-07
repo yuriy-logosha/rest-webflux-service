@@ -6,10 +6,7 @@ import com.example.restwebfluxservice.repository.IncomingDataRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
 import reactor.core.publisher.Mono;
-
-import static org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST;
 
 @Service
 public class IncomingDataService {
@@ -24,7 +21,7 @@ public class IncomingDataService {
         this.client = client;
     }
 
-    public Mono create(IncomingData data) {
+    public Mono<String> create(IncomingData data) {
         return Mono.defer(() -> {
             data.setMessage(client.getResultCode(data.getMessage()) + "");
             IncomingData saved = incomingDataRepository.save(data);

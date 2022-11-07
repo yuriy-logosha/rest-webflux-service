@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.request.RequestContextHolder;
 import reactor.core.publisher.Mono;
-
-import static org.springframework.web.context.request.RequestAttributes.SCOPE_REQUEST;
 
 @RestController
 @RequestMapping("/data")
@@ -22,10 +19,8 @@ public class IncomingDataController {
     }
 
     @PostMapping("/create")
-    public Mono<Integer> create(@RequestBody IncomingData data) {
-        RequestContextHolder.currentRequestAttributes().setAttribute("id", data.getId(), SCOPE_REQUEST);
-        Mono mono = incomingDataService.create(data);
-        return mono;
+    public Mono<String> create(@RequestBody IncomingData data) {
+        return incomingDataService.create(data).contextWrite(ctx -> ctx.put("id", data.getId()));
     }
 
 }
