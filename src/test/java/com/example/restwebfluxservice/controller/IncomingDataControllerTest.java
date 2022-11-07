@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 @Import(IncomingDataService.class)
 public class IncomingDataControllerTest {
 
+    private static final Integer TEST_ID = 2022;
     private static final String TEST_MSG = "2022";
     private static final int TEST_SOAP_RESULT = 2022;
     @MockBean
@@ -40,7 +41,7 @@ public class IncomingDataControllerTest {
     void testCreate() {
         IncomingData message = new IncomingData();
         message.setMessage(TEST_MSG);
-        message.setId(TEST_MSG);
+        message.setId(TEST_ID);
 
         when(repository.save(message)).thenReturn(message);
         when(client.getResultCode(TEST_MSG)).thenReturn(TEST_SOAP_RESULT);

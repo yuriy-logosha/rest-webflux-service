@@ -16,6 +16,6 @@ import javax.persistence.Id;
 @Scope(scopeName = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class IncomingData {
     @Id
-    private String id;
+    private Integer id;
     private String message;
 }
