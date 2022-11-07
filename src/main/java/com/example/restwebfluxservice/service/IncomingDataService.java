@@ -21,11 +21,11 @@ public class IncomingDataService {
         this.client = client;
     }
 
-    public Mono<String> create(IncomingData data) {
+    public Mono<Integer> create(IncomingData data) {
         return Mono.defer(() -> {
-            data.setMessage(client.getResultCode(data.getMessage()) + "");
-            IncomingData saved = incomingDataRepository.save(data);
-            return Mono.just(saved.getId());
+            Integer resultCode = client.getResultCode(data.getMessage());
+            incomingDataRepository.save(data);
+            return Mono.just(resultCode);
         });
     }
 }

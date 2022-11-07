@@ -19,7 +19,7 @@ public class IncomingDataController {
     }
 
     @PostMapping("/create")
-    public Mono<String> create(@RequestBody IncomingData data) {
+    public Mono<Integer> create(@RequestBody IncomingData data) {
         return incomingDataService.create(data).contextWrite(ctx -> ctx.put("id", data.getId()));
     }
 
