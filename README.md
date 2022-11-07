@@ -4,14 +4,14 @@ Gradle, Webflux, Spring Boot 2.7.5, JAXB, JPA, H2
 
 ### Endpoint:
 
-```json
+```
 REST <server-name>:<port>/data/create
 
 Input body:
 {"id":123, "message":"555"}
 
 Result:
-555
+123
 ```
 
 ### Features:
